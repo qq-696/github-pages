@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>遇见八桂 - 非遗文化传承与文创购物平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#D4AF37', // 金色主色调
+                        secondary: '#2E8B57', // 绿色辅助色
+                        accent: '#8B4513', // 棕色强调色
+                        neutral: '#F5F5DC', // 米色背景
+                        dark: '#333333', // 深色文本
+                        'primary-light': '#E8D7A3', // 浅金色
+                        'secondary-light': '#A2C579', // 浅绿色
+                    },
+                    fontFamily: {
+                        sans: ['PingFang SC', 'Microsoft YaHei', 'sans-serif'],
+                        serif: ['SimSun', 'serif'],
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        }
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            }
+            .card-hover {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+            .bg-pattern {
+                background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            }
+            .scroll-indicator {
+                animation: bounce 2s infinite;
+            }
+            .btn-primary {
+                @apply bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg;
+            }
+            .btn-secondary {
+                @apply bg-secondary hover:bg-secondary/90 text-white font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg;
+            }
+            .民族元素-铜鼓 {
+                @apply relative overflow-hidden;
+            }
+            .民族元素-铜鼓::before {
+                content: "";
+                @apply absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cGF0aCBkPSJNMTAgMTBWMzBoMzBWMTAaTTIwIDIwSDMwVjMwSDIwWiIvPjxwYXRoIGQ9Ik0xNjAgMTBWMzBoMzBWMTAiLz48cGF0aCBkPSJNMTgwIDIwaDEwdjEwaC0xWiIvPjxwYXRoIGQ9Ik0xOTAgNjBWMzBoLTMwVjYwIiBmaWxsPSJub25lIiBzdHJva2U9IiNEMEFGMzciIHN0cm9rZS1vcGFjaXR5PSIwLjIiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik0xNjAgNzBIMzBWNzBIMTYwIiBmaWxsPSJub25lIiBzdHJva2U9IiNEMEFGMzciIHN0cm9rZS1vcGFjaXR5PSIwLjIiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik0xOTAgMTAwVjgwSDYwVjEwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRDRBRjM3IiBzdHJva2Utb3BhY2l0eT0iMC4yIiBzdHJva2Utd2lkdGg9IjEiLz48cGF0aCBkPSJNMTYwIDExMEg5MFYxNjBIMTYwIiBmaWxsPSJub25lIiBzdHJva2U9IiNEMEFGMzciIHN0cm9rZS1vcGFjaXR5PSIwLjIiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik0xNjAgMTkwaC0zMFYxNjBIMTYwIiBmaWxsPSJub25lIiBzdHJva2U9IiNEMEFGMzciIHN0cm9rZS1vcGFjaXR5PSIwLjIiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik0xMDIgMTkwaC0zMFYxNjBIMTAyIiBmaWxsPSJub25lIiBzdHJva2U9IiNEMEFGMzciIHN0cm9rZS1vcGFjaXR5PSIwLjIiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik00MCAxOTBoLTMwVjE2aDMwIiBmaWxsPSJub25lIiBzdHJva2U9IiNEMEFGMzciIHN0cm9rZS1vcGFjaXR5PSIwLjIiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik00MCAxMzBIMTBWMTAzSDQwIiBmaWxsPSJub25lIiBzdHJva2U9IiNEMEFGMzciIHN0cm9rZS1vcGFjaXR5PSIwLjIiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik0xOTAgMTQwaC0zMHYtMzBIMTkwIiBmaWxsPSJub25lIiBzdHJva2U9IiNEMEFGMzciIHN0cm9rZS1vcGFjaXR5PSIwLjIiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik0xOTAgMTYwaC0zMHYtMzBIMTkwIiBmaWxsPSJub25lIiBzdHJva2U9IiNEMEFGMzciIHN0cm9rZS1vcGFjaXR5PSIwLjIiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik0xOTAgMTgwaC0zMHYtMzBIMTkwIiBmaWxsPSJub25lIiBzdHJva2U9IiNEMEFGMzciIHN0cm9rZS1vcGFjaXR5PSIwLjIiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik0xNjAgMTYwSDEzMFYxMzBIMTYwIiBmaWxsPSJub25lIiBzdHJva2U9IiNEMEFGMzciIHN0cm9rZS1vcGFjaXR5PSIwLjIiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik0xMzAgMTYwSDEwMFYxMzBIMTMwIiBmaWxsPSJub25lIiBzdHJva2U9IiNEMEFGMzciIHN0cm9rZS1vcGFjaXR5PSIwLjIiIHN0cm9rZS13aWR0aD0iMSIvPjxwYXRoIGQ9Ik0xMDIgMTYwSDcyVjEzMEgxMDIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0Q0QUYzNyIgc3Ryb2tlLW9wYWNpdHk9IjAuMiIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9zdmc+')] bg-no-repeat bg-center bg-contain opacity-10;
+            }
+        }
+    </style>
+</head>
+<body class="bg-neutral text-dark overflow-x-hidden">
+<!-- 装饰性民族元素 -->
+<div class="民族元素-铜鼓 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] -z-10"></div>
+
+<!-- 导航栏 -->
+<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="navbar">
+    <div class="bg-primary/95 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2">
+                <i class="fa fa-paint-brush text-2xl"></i>
+                <span class="text-xl font-serif font-bold">遇见八桂</span>
+            </a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#首页" class="hover:text-secondary transition-colors">首页</a>
+                <a href="#非遗文化" class="hover:text-secondary transition-colors">非遗文化</a>
+                <a href="#商品中心" class="hover:text-secondary transition-colors">商品中心</a>
+                <a href="#非遗传承人" class="hover:text-secondary transition-colors">非遗传承人</a>
+                <a href="#联系我们" class="hover:text-secondary transition-colors">联系我们</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <button class="md:hidden text-white" id="menu-toggle">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+                <a href="#购物车" class="hidden md:block relative">
+                    <i class="fa fa-shopping-cart text-xl"></i>
+                    <span class="absolute -top-2 -right-2 bg-secondary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 移动端菜单 -->
+    <div class="bg-white shadow-lg hidden md:hidden absolute w-full" id="mobile-menu">
+        <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
+            <a href="#首页" class="py-2 border-b border-gray-100 hover:text-primary transition-colors">首页</a>
+            <a href="#非遗文化" class="py-2 border-b border-gray-100 hover:text-primary transition-colors">非遗文化</a>
+            <a href="#商品中心" class="py-2 border-b border-gray-100 hover:text-primary transition-colors">商品中心</a>
+            <a href="#非遗传承人" class="py-2 border-b border-gray-100 hover:text-primary transition-colors">非遗传承人</a>
+            <a href="#联系我们" class="py-2 hover:text-primary transition-colors">联系我们</a>
+        </div>
+    </div>
+</header>
+
+<!-- 英雄区 -->
+<section class="relative h-screen flex items-center justify-center overflow-hidden" id="首页">
+    <div class="absolute inset-0 z-0">
+        <img src="八桂.png" alt="广西风光" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-dark/50"></div>
+    </div>
+    <div class="container mx-auto px-4 z-10 text-center">
+        <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-serif font-bold text-white text-shadow mb-6 animate-fadeIn">
+            遇见八桂<br>非遗之美
+        </h1>
+        <p class="text-[clamp(1rem,2vw,1.5rem)] text-white text-shadow mb-10 max-w-2xl mx-auto">
+            探索广西非物质文化遗产，传承千年民族智慧，感受八桂大地独特魅力
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="#商品中心" class="btn-primary">
+                探索商品
+            </a>
+            <a href="#非遗传承人" class="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-full transition-all hover:bg-white/10 shadow-lg">
+                了解非遗
+            </a>
+        </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white scroll-indicator">
+            <i class="fa fa-angle-down text-3xl"></i>
+        </div>
+    </div>
+</section>
+
+<!-- 分隔装饰 -->
+<div class="w-full h-16 bg-primary/10 flex items-center justify-center">
+    <div class="w-3/4 h-px bg-primary/30"></div>
+</div>
+
+<!-- 非遗文化介绍 -->
+<section class="py-20 bg-white" id="非遗文化">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-serif font-bold text-dark mb-4">
+                <span class="text-primary">八桂</span>非遗文化
+            </h2>
+            <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                广西，又称八桂大地，拥有丰富的非物质文化遗产。这里是壮族、瑶族、苗族等多个民族的聚居地，
+                每个民族都有其独特的传统技艺、音乐舞蹈和民俗文化。
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-neutral rounded-lg overflow-hidden shadow-md card-hover">
+                <div class="relative">
+                    <img src="壮锦.png" alt="壮族织锦" class="w-full h-60 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark/70 to-transparent flex items-end">
+                        <div class="p-4">
+                            <h3 class="text-xl font-bold text-white">壮族织锦</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <p class="text-gray-600 mb-4">
+                        壮族织锦是中国四大名锦之一，距今已有一千多年的历史。其图案精美，色彩艳丽，
+                        反映了壮族人民的生活和审美。
+                    </p>
+                    <a href="#" class="text-secondary hover:text-secondary/80 inline-flex items-center">
+                        了解更多 <i class="fa fa-long-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-neutral rounded-lg overflow-hidden shadow-md card-hover">
+                <div class="relative">
+                    <img src="苗服.png" alt="苗族银饰" class="w-full h-60 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark/70 to-transparent flex items-end">
+                        <div class="p-4">
+                            <h3 class="text-xl font-bold text-white">苗族银饰</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <p class="text-gray-600 mb-4">
+                        苗族银饰制作工艺精湛，造型多样，是苗族文化的重要组成部分。每一件银饰都承载着
+                        苗族人民对美好生活的向往。
+                    </p>
+                    <a href="#" class="text-secondary hover:text-secondary/80 inline-flex items-center">
+                        了解更多 <i class="fa fa-long-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-neutral rounded-lg overflow-hidden shadow-md card-hover">
+                <div class="relative">
+                    <img src="银饰.jpg" alt="瑶族服饰" class="w-full h-60 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark/70 to-transparent flex items-end">
+                        <div class="p-4">
+                            <h3 class="text-xl font-bold text-white">瑶族服饰</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <p class="text-gray-600 mb-4">
+                        瑶族服饰色彩斑斓，图案丰富，手工刺绣技艺独特。服饰上的每一个图案都有其特定的含义，
+                        是瑶族文化的"无字史书"。
+                    </p>
+                    <a href="#" class="text-secondary hover:text-secondary/80 inline-flex items-center">
+                        了解更多 <i class="fa fa-long-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 分隔装饰 -->
+<div class="w-full h-16 bg-pattern flex items-center justify-center">
+    <div class="w-3/4 h-px bg-primary/30"></div>
+</div>
+
+<!-- 商品中心 -->
+<section class="py-20 bg-neutral" id="商品中心">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-serif font-bold text-dark mb-4">
+                非遗<span class="text-primary">文创</span>商品
+            </h2>
+            <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                我们精选八桂大地最具代表性的非遗元素，融入现代设计理念，打造兼具艺术性与实用性的文创产品，
+                让非遗走进现代生活。
+            </p>
+        </div>
+
+        <!-- 商品分类标签 -->
+        <div class="flex flex-wrap justify-center gap-4 mb-12">
+            <button class="px-6 py-2 bg-primary text-white rounded-full shadow-md hover:bg-primary/90 transition-colors">
+                全部商品
+            </button>
+            <button class="px-6 py-2 bg-white text-dark rounded-full shadow-md hover:bg-gray-100 transition-colors">
+                冰箱贴系列
+            </button>
+            <button class="px-6 py-2 bg-white text-dark rounded-full shadow-md hover:bg-gray-100 transition-colors">
+                明信片系列
+            </button>
+            <button class="px-6 py-2 bg-white text-dark rounded-full shadow-md hover:bg-gray-100 transition-colors">
+                服饰配件
+            </button>
+        </div>
+
+        <!-- 商品列表 -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- 壮族头饰冰箱贴 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+                <div class="relative">
+                    <img src="壮族头饰冰箱贴.png" alt="壮族头饰冰箱贴" class="w-full h-64 object-cover">
+                    <div class="absolute top-4 right-4 bg-primary text-white text-sm font-bold px-3 py-1 rounded-full">
+                        热卖
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-xl font-bold text-dark">壮族头饰冰箱贴</h3>
+                        <span class="text-primary font-bold text-lg"></span>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        遇见漓江系列，金属烤漆工艺，还原壮族头饰细节，传递民族风情。既是实用的装饰，也是传递广西文化的载体。
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <div class="text-yellow-400 flex">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-o"></i>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-2">(128)</span>
+                        </div>
+                        <button class="bg-secondary hover:bg-secondary/90 text-white p-2 rounded-full transition-colors">
+                            <i class="fa fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 非遗明信片系列 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+                <div class="relative">
+                    <img src="明信片.png" alt="非遗明信片系列" class="w-full h-64 object-cover">
+                    <div class="absolute top-4 right-4 bg-accent text-white text-sm font-bold px-3 py-1 rounded-full">
+                        新品
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-xl font-bold text-dark">非遗明信片系列</h3>
+                        <span class="text-primary font-bold text-lg"></span>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        融合南宁壮族、桂林瑶族、百色苗族、柳州仫佬族特色。封面绘有萌趣卡通人物，
+                        兼具实用与文化收藏价值，是记录旅行与感受民族风情的好伴侣。
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <div class="text-yellow-400 flex">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-2">(86)</span>
+                        </div>
+                        <button class="bg-secondary hover:bg-secondary/90 text-white p-2 rounded-full transition-colors">
+                            <i class="fa fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 民族风冰箱贴 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+                <div class="relative">
+                    <img src="民族冰箱贴.png" alt="民族风冰箱贴" class="w-full h-64 object-cover">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-xl font-bold text-dark">民族风冰箱贴</h3>
+                        <span class="text-primary font-bold text-lg"></span>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        融合壮锦与苗族银饰元素。壮锦图案绚丽，承载民族文化底蕴；苗族银饰造型精美，工艺精湛。
+                        二者结合，碰撞出独特美感，是装点家居、传递民族风情的好物。
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <div class="text-yellow-400 flex">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-2">(156)</span>
+                        </div>
+                        <button class="bg-secondary hover:bg-secondary/90 text-white p-2 rounded-full transition-colors">
+                            <i class="fa fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 壮锦笔记本 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+                <div class="relative">
+                    <img src="笔记本.png" alt="笔记本" class="w-full h-64 object-cover">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-xl font-bold text-dark">笔记本</h3>
+                        <span class="text-primary font-bold text-lg">9</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        内页为100g道林纸，书写顺滑。笔记本设计精美，
+                        是办公、学习和收藏的佳品。
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <div class="text-yellow-400 flex">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-o"></i>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-2">(72)</span>
+                        </div>
+                        <button class="bg-secondary hover:bg-secondary/90 text-white p-2 rounded-full transition-colors">
+                            <i class="fa fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 苗族银饰钥匙扣 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+                <div class="relative">
+                    <img src="钥匙扣.png" alt="苗族银饰钥匙扣" class="w-full h-64 object-cover">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-xl font-bold text-dark">苗族银饰钥匙扣</h3>
+                        <span class="text-primary font-bold text-lg"></span>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        以苗族传统银饰为灵感，纯手工打造。造型精美，工艺精湛，小巧玲珑，
+                        是日常使用和送礼的佳品。
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <div class="text-yellow-400 flex">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-2">(93)</span>
+                        </div>
+                        <button class="bg-secondary hover:bg-secondary/90 text-white p-2 rounded-full transition-colors">
+                            <i class="fa fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 瑶族刺绣书签 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+                <div class="relative">
+                    <img src="书签.png" alt="瑶族刺绣书签" class="w-full h-64 object-cover">
+                    <div class="absolute top-4 right-4 bg-accent text-white text-sm font-bold px-3 py-1 rounded-full">
+                        限量
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-xl font-bold text-dark">瑶族刺绣书签</h3>
+                        <span class="text-primary font-bold text-lg"></span>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        采用瑶族传统刺绣工艺，手工制作。每一枚书签都有独特的图案，色彩鲜艳，
+                        是读书爱好者和收藏者的理想选择。
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <div class="text-yellow-400 flex">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-2">(48)</span>
+                        </div>
+                        <button class="bg-secondary hover:bg-secondary/90 text-white p-2 rounded-full transition-colors">
+                            <i class="fa fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 查看更多按钮 -->
+        <div class="text-center mt-12">
+            <button class="btn-primary">
+                查看更多商品 <i class="fa fa-arrow-right ml-2"></i>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- 非遗传承人视频 -->
+<section class="py-20 bg-white" id="非遗传承人">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-serif font-bold text-dark mb-4">
+                非遗<span class="text-primary">传承人</span>说
+            </h2>
+            <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                聆听非遗传承人的故事，了解他们如何坚守传统技艺，将千年文化传承至今。
+                观看视频，即可获得精美非遗小礼物一份。
+            </p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+            <div class="relative rounded-xl overflow-hidden shadow-xl">
+                <div class="aspect-video bg-gray-100 rounded-xl overflow-hidden">
+                    <video id="非遗视频" controls poster="https://picsum.photos/id/1070/1200/675" class="w-full h-full object-cover">
+                        <source src="https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4">
+                        您的浏览器不支持视频播放
+                    </video>
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity bg-dark/40">
+                    <button class="bg-primary/90 text-white w-20 h-20 rounded-full flex items-center justify-center" onclick="document.getElementById('非遗视频').play()">
+                        <i class="fa fa-play text-3xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-neutral p-6 rounded-xl">
+                <h3 class="text-xl font-bold text-dark mb-3">传承人</h3>
+                <p class="text-gray-600 mb-4">
+                    广西壮族织锦的代表性传承人，致力于传承和发展壮锦文化，
+                    不仅保留了传统技艺，还将现代设计理念融入其中，使壮锦焕发出新的生命力。
+                </p>
+                <div class="flex flex-wrap gap-4">
+                        <span class="bg-primary/10 text-primary px-4 py-1 rounded-full text-sm">
+                            壮族织锦
+                        </span>
+                    <span class="bg-primary/10 text-primary px-4 py-1 rounded-full text-sm">
+                            国家级非遗
+                        </span>
+                    <span class="bg-primary/10 text-primary px-4 py-1 rounded-full text-sm">
+                            传承40年
+                        </span>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center">
+                <button class="gift-btn bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg" onclick="showGiftAlert()">
+                    观看完视频领取非遗小礼物 <i class="fa fa-gift ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 用户评价 -->
+<section class="py-20 bg-neutral" id="用户评价">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-serif font-bold text-dark mb-4">
+                用户<span class="text-primary">评价</span>
+            </h2>
+            <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                听听我们的顾客怎么说，他们的真实体验是我们不断进步的动力。
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-md card-hover">
+                <div class="flex items-center mb-4">
+                    <img src="https://picsum.photos/id/1005/100/100" alt="用户头像" class="w-12 h-12 rounded-full object-cover">
+                    <div class="ml-4">
+                        <h4 class="font-bold text-dark">李小姐</h4>
+                        <div class="text-yellow-400 flex">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-600">
+                    "购买了壮族头饰冰箱贴，做工非常精细，图案栩栩如生。既能作为装饰品，又能了解广西的民族文化，
+                    非常满意！"
+                </p>
+                <div class="mt-4 text-sm text-gray-500">
+                    购买商品：壮族头饰冰箱贴
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-md card-hover">
+                <div class="flex items-center mb-4">
+                    <img src="https://picsum.photos/id/1012/100/100" alt="用户头像" class="w-12 h-12 rounded-full object-cover">
+                    <div class="ml-4">
+                        <h4 class="font-bold text-dark">张先生</h4>
+                        <div class="text-yellow-400 flex">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-600">
+                    "非遗明信片的设计很有特色，每张都有不同的民族元素，很适合收藏和赠送朋友。唯一的小缺点是纸质略薄，
+                    希望后续可以改进。"
+                </p>
+                <div class="mt-4 text-sm text-gray-500">
+                    购买商品：非遗明信片系列
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-md card-hover">
+                <div class="flex items-center mb-4">
+                    <img src="https://picsum.photos/id/1027/100/100" alt="用户头像" class="w-12 h-12 rounded-full object-cover">
+                    <div class="ml-4">
+                        <h4 class="font-bold text-dark">王女士</h4>
+                        <div class="text-yellow-400 flex">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-600">
+                    "壮锦笔记本的封面设计精美，内页纸张质量也很好。作为一个文具爱好者，我非常喜欢这种将传统文化与现代设计
+                    相结合的产品。"
+                </p>
+                <div class="mt-4 text-sm text-gray-500">
+                    购买商品：壮锦笔记本
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 联系我们 -->
+<section class="py-20 bg-white" id="联系我们">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-serif font-bold text-dark mb-4">
+                联系<span class="text-primary">我们</span>
+            </h2>
+            <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                无论你是普通用户还是非遗传承人，我们都期待与你建立联系。普通用户可以咨询产品信息或提出建议，
+                非遗传承人可以洽谈合作事宜，共同传承和发展八桂非遗文化。
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- 普通用户联系表单 -->
+            <div class="bg-neutral p-8 rounded-xl shadow-lg">
+                <h3 class="text-xl font-bold text-dark mb-6 flex items-center">
+                    <i class="fa fa-user-circle text-primary mr-3"></i> 普通用户咨询
+                </h3>
+                <form id="user-form" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="user-name" class="block text-gray-700 font-medium mb-2">姓名</label>
+                            <input type="text" id="user-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="请输入您的姓名">
+                        </div>
+                        <div>
+                            <label for="user-email" class="block text-gray-700 font-medium mb-2">邮箱</label>
+                            <input type="email" id="user-email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="请输入您的邮箱">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="user-subject" class="block text-gray-700 font-medium mb-2">主题</label>
+                        <input type="text" id="user-subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="请输入咨询主题">
+                    </div>
+                    <div>
+                        <label for="user-message" class="block text-gray-700 font-medium mb-2">留言内容</label>
+                        <textarea id="user-message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="请输入您的留言内容"></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn-primary w-full">
+                            提交咨询 <i class="fa fa-paper-plane ml-2"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 非遗传承人联系表单 -->
+            <div class="bg-neutral p-8 rounded-xl shadow-lg">
+                <h3 class="text-xl font-bold text-dark mb-6 flex items-center">
+                    <i class="fa fa-handshake-o text-primary mr-3"></i> 非遗传承人合作
+                </h3>
+                <form id="artist-form" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="artist-name" class="block text-gray-700 font-medium mb-2">姓名</label>
+                            <input type="text" id="artist-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="请输入您的姓名">
+                        </div>
+                        <div>
+                            <label for="artist-phone" class="block text-gray-700 font-medium mb-2">联系电话</label>
+                            <input type="tel" id="artist-phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="请输入您的联系电话">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="artist-type" class="block text-gray-700 font-medium mb-2">非遗项目类型</label>
+                        <select id="artist-type" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary">
+                            <option value="">请选择非遗项目类型</option>
+                            <option value="壮族织锦">壮族织锦</option>
+                            <option value="苗族银饰">苗族银饰</option>
+                            <option value="瑶族服饰">瑶族服饰</option>
+                            <option value="侗族木构建筑">侗族木构建筑</option>
+                            <option value="其他">其他</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="artist-intro" class="block text-gray-700 font-medium mb-2">个人简介</label>
+                        <textarea id="artist-intro" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="请简要介绍您的非遗传承经历和成就"></textarea>
+                    </div>
+                    <div>
+                        <label for="artist-cooperation" class="block text-gray-700 font-medium mb-2">合作意向</label>
+                        <textarea id="artist-cooperation" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="请简要描述您的合作意向和期望"></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn-secondary w-full">
+                            提交合作申请 <i class="fa fa-paper-plane ml-2"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- 联系信息 -->
+        <div class="mt-16 bg-primary/10 p-8 rounded-xl">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-phone text-primary text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-dark mb-2">电话咨询</h4>
+                    <p class="text-gray-600">13737005216</p>
+                    <p class="text-gray-600">周一至周日 9:00-18:00</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-envelope text-primary text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-dark mb-2">邮箱联系</h4>
+                    <p class="text-gray-600">nhq2846526152@qq.com</p>
+                    <p class="text-gray-600">我们会在24小时内回复</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-map-marker text-primary text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-dark mb-2">公司地址</h4>
+                    <p class="text-gray-600">广西壮族自治区桂林市</p>
+                    <p class="text-gray-600">非遗文化大厦</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 订阅区域 -->
+<section class="py-16 bg-primary text-white">
+    <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-2xl font-bold mb-4">订阅我们的非遗文化资讯</h2>
+            <p class="mb-8">获取最新的非遗活动、产品信息和文化故事</p>
+            <form class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+                <input type="email" placeholder="请输入您的邮箱地址" class="flex-grow px-4 py-3 rounded-full focus:outline-none text-dark">
+                <button type="submit" class="bg-white text-primary font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition-colors">
+                    订阅
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- 页脚 -->
+<footer class="bg-dark text-white pt-16 pb-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+            <div>
+                <div class="flex items-center space-x-2 mb-6">
+                    <i class="fa fa-paint-brush text-2xl text-primary"></i>
+                    <span class="text-xl font-serif font-bold">遇见八桂</span>
+                </div>
+                <p class="text-gray-400 mb-6">
+                    致力于传承和弘扬广西非物质文化遗产，让世界感受八桂大地的独特魅力。
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center hover:bg-primary/30 transition-colors">
+                        <i class="fa fa-weixin"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center hover:bg-primary/30 transition-colors">
+                        <i class="fa fa-weibo"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center hover:bg-primary/30 transition-colors">
+                        <i class="fa fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center hover:bg-primary/30 transition-colors">
+                        <i class="fa fa-youtube-play"></i>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-6">快速链接</h3>
+                <ul class="space-y-3">
+                    <li><a href="#首页" class="text-gray-400 hover:text-primary transition-colors">首页</a></li>
+                    <li><a href="#非遗文化" class="text-gray-400 hover:text-primary transition-colors">非遗文化</a></li>
+                    <li><a href="#商品中心" class="text-gray-400 hover:text-primary transition-colors">商品中心</a></li>
+                    <li><a href="#非遗传承人" class="text-gray-400 hover:text-primary transition-colors">非遗传承人</a></li>
+                    <li><a href="#联系我们" class="text-gray-400 hover:text-primary transition-colors">联系我们</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-6">帮助中心</h3>
+                <ul class="space-y-3">
+                    <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">常见问题</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">配送政策</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">退换货政策</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">隐私政策</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">使用条款</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-6">工作时间</h3>
+                <ul class="space-y-3">
+                    <li class="text-gray-400">周一至周五: 9:00 - 18:00</li>
+                    <li class="text-gray-400">周六至周日: 10:00 - 16:00</li>
+                    <li class="text-gray-400">法定节假日: 休息</li>
+                    <li class="text-gray-400 mt-4">联系电话: 13737005216</li>
+                    <li class="text-gray-400">邮箱: nhq2846526152@qq.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
+            <p>© 2025 遇见八桂 - 广西非遗文化传承与文创平台. 保留所有权利.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- 返回顶部按钮 -->
+<button id="back-to-top" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-primary/90">
+    <i class="fa fa-arrow-up"></i>
+</button>
+
+<!-- JavaScript -->
+<script>
+    // 导航栏滚动效果
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('py-2');
+            navbar.classList.remove('py-3');
+        } else {
+            navbar.classList.add('py-3');
+            navbar.classList.remove('py-2');
+        }
+    });
+
+    // 移动端菜单切换
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+                // 关闭移动菜单
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            }
+        });
+    });
+
+    // 返回顶部按钮
+    const backToTopButton = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTopButton.classList.remove('opacity-0', 'invisible');
+            backToTopButton.classList.add('opacity-100', 'visible');
+        } else {
+            backToTopButton.classList.add('opacity-0', 'invisible');
+            backToTopButton.classList.remove('opacity-100', 'visible');
+        }
+    });
+
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // 表单提交处理
+    const userForm = document.getElementById('user-form');
+    const artistForm = document.getElementById('artist-form');
+
+    userForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('感谢您的咨询，我们会尽快回复您！');
+        userForm.reset();
+    });
+
+    artistForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('感谢您的合作申请，我们会尽快与您联系！');
+        artistForm.reset();
+    });
+
+    // 礼物领取提示
+    function showGiftAlert() {
+        alert('感谢您观看非遗传承人的故事！请留下您的联系方式，我们将为您寄送一份精美的非遗小礼物。');
+    }
+
+    // 商品价格显示修复
+    // 由于之前的CSS配置可能导致价格不显示，这里通过JavaScript确保价格元素可见
+    document.addEventListener('DOMContentLoaded', () => {
+        const priceElements = document.querySelectorAll('.text-primary.font-bold');
+        priceElements.forEach(el => {
+            el.style.color = '#D4AF37'; // 确保价格颜色为金色
+            el.style.fontWeight = 'bold'; // 确保价格字体为粗体
+        });
+    });
+</script>
+</body>
+</html>
