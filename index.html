@@ -6,33 +6,29 @@
     <title>非遗文创平台</title>
     <style>
       :root {
-        --bg: #0e0d0c;
+        --outer-bg: #11100f;
         --page-bg: #f1efe8;
-        --card-bg: #f6f0e3;
-        --card-strong: #f3ebd9;
+        --panel-bg: #f6f0e4;
         --panel-soft: #f5f2eb;
-        --line: #d8c9a0;
-        --gold: #d7b566;
-        --gold-deep: #b98b2b;
-        --brown: #2f251e;
-        --text: #1c1a17;
-        --muted: #6a635d;
-        --green: #4b8c56;
-        --green-deep: #387147;
-        --shadow: rgba(55, 38, 22, 0.12);
+        --panel-strong: #f3ebd9;
+        --line: rgba(120, 103, 80, 0.18);
+        --text: #1c1a18;
+        --muted: #6a5f57;
+        --gold: #d4b067;
+        --gold-deep: #c08d2c;
+        --green: #4a9a5d;
+        --green-deep: #3a7b4a;
+        --shadow: rgba(49, 39, 30, 0.08);
       }
 
-      * {
-        box-sizing: border-box;
-      }
+      * { box-sizing: border-box; }
 
-      html,
-      body {
+      html, body {
         margin: 0;
         padding: 0;
-        background: var(--bg);
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+        background: var(--outer-bg);
         color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
       }
 
       body {
@@ -40,128 +36,125 @@
       }
 
       .page {
-        width: min(1280px, calc(100% - 46px));
-        margin: 28px auto 30px;
+        width: min(1280px, calc(100% - 52px));
+        margin: 26px auto 28px;
         background: var(--page-bg);
-        padding: 24px 30px 0;
+        padding: 22px 28px 0;
       }
 
       .top-grid {
         display: grid;
-        grid-template-columns: 1.25fr 1fr;
-        gap: 24px;
-        margin-bottom: 26px;
+        grid-template-columns: 1.28fr 1fr;
+        gap: 22px;
+        align-items: start;
+        margin-bottom: 20px;
       }
 
-      .craft-panel,
-      .heritage-panel,
-      .consult-form,
-      .cooperate-form {
-        background: var(--card-bg);
-        border: 1px solid rgba(124, 101, 77, 0.18);
-        border-radius: 14px;
-        box-shadow: 0 4px 12px rgba(38, 30, 22, 0.05);
+      .panel {
+        background: var(--panel-bg);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        box-shadow: 0 4px 12px var(--shadow);
       }
 
       .craft-panel {
-        padding: 18px 16px 14px;
+        padding: 18px 16px 16px;
       }
 
-      .panel-header {
+      .heritage-panel {
+        padding: 18px 18px 16px;
+      }
+
+      .panel-head {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 12px;
-        margin-bottom: 14px;
+        gap: 10px;
+        margin-bottom: 12px;
       }
 
       .panel-title {
-        font-size: 22px;
-        font-weight: 700;
-        line-height: 1.4;
         margin: 0;
+        font-size: 22px;
+        line-height: 1.4;
+        font-weight: 700;
       }
 
-      .panel-badge {
-        font-size: 12px;
-        color: var(--muted);
-        padding: 6px 10px;
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 72px;
+        height: 28px;
+        padding: 0 12px;
         border-radius: 999px;
-        background: rgba(255,255,255,0.25);
-        border: 1px solid rgba(108, 95, 74, 0.18);
+        font-size: 11px;
+        color: var(--muted);
+        background: rgba(255,255,255,0.24);
+        border: 1px solid rgba(110, 95, 75, 0.18);
       }
 
-      .hero-copy {
-        margin: 0 0 12px;
-        color: #4b463f;
+      .panel-copy {
+        margin: 0 0 16px;
+        color: #4f4b47;
         font-size: 14px;
-        line-height: 1.8;
+        line-height: 1.9;
       }
 
-      .product-showcase {
+      .showcase {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 14px;
-        margin-bottom: 8px;
       }
 
-      .mini-card {
-        background: rgba(255,255,255,0.2);
-        border: 1px solid rgba(135, 117, 94, 0.2);
-        border-radius: 8px;
+      .card {
+        background: rgba(255,255,255,0.18);
+        border: 1px solid rgba(126,103,72,0.18);
+        border-radius: 10px;
         overflow: hidden;
       }
 
-      .mini-image {
-        height: 106px;
+      .card-image {
+        height: 130px;
         background-size: cover;
         background-position: center;
-        border-bottom: 1px solid rgba(135, 117, 94, 0.18);
+        border-bottom: 1px solid rgba(126,103,72,0.14);
       }
 
-      .mini-body {
+      .card-body {
         padding: 10px 12px 12px;
       }
 
-      .mini-name {
+      .card-name {
         margin: 0 0 6px;
-        font-size: 14px;
+        font-size: 16px;
         line-height: 1.5;
         font-weight: 700;
       }
 
-      .mini-desc {
+      .card-desc {
         margin: 0;
         color: var(--muted);
         font-size: 12px;
         line-height: 1.7;
       }
 
-      .mini-stat {
-        margin-top: 8px;
+      .card-meta {
+        margin-top: 10px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        color: #7a6759;
+        color: #6d625d;
         font-size: 11px;
       }
 
       .stars {
-        color: #dcae43;
         letter-spacing: 2px;
-      }
-
-      .heritage-panel {
-        padding: 20px 18px 18px;
-      }
-
-      .heritage-header {
-        margin-bottom: 12px;
+        color: #d9ae52;
       }
 
       .heritage-panel .panel-title {
         font-size: 20px;
-        margin-bottom: 10px;
       }
 
       .heritage-copy {
@@ -171,50 +164,52 @@
         line-height: 2;
       }
 
-      .heritage-image {
+      .heritage-photo {
         height: 186px;
         margin: 16px 0 12px;
-        background: url('fe6d9ca38ffa2336bb061cef09b5f9d8.jpg') center/cover no-repeat;
         border-radius: 10px;
-        border: 1px solid rgba(108, 95, 74, 0.12);
+        border: 1px solid rgba(121, 99, 72, 0.12);
+        background: url('fe6d9ca38ffa2336bb061cef09b5f9d8.jpg') center/cover no-repeat;
       }
 
-      .heritage-feature {
-        padding-top: 12px;
-        margin-top: 12px;
-        border-top: 1px solid rgba(116, 96, 72, 0.15);
+      .heritage-extra {
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid rgba(115, 92, 65, 0.18);
       }
 
-      .heritage-feature p {
+      .heritage-extra p {
         margin: 0;
-        color: #4c4440;
+        color: #4a423d;
         font-size: 13px;
         line-height: 2;
       }
 
-      .heritage-feature .cta {
+      .cta {
         display: inline-flex;
+        align-items: center;
+        justify-content: center;
         margin-top: 14px;
         padding: 10px 18px;
         border-radius: 999px;
-        background: linear-gradient(180deg, #d8b362, #c38d2f);
-        color: #fff;
         text-decoration: none;
+        background: linear-gradient(180deg, #d8b566, #c58d2e);
+        color: #fff;
         font-size: 12px;
         font-weight: 700;
-        box-shadow: 0 8px 18px rgba(181, 129, 44, 0.18);
+        box-shadow: 0 8px 18px rgba(181, 129, 44, 0.16);
       }
 
-      .contact-section {
-        margin-top: 14px;
+      .contact-wrap {
+        margin-top: 12px;
       }
 
-      .section-heading {
+      .contact-title {
         text-align: center;
-        margin: 8px 0 18px;
+        margin: 6px 0 16px;
       }
 
-      .section-heading h2 {
+      .contact-title h2 {
         margin: 0;
         font-size: 38px;
         line-height: 1.2;
@@ -222,42 +217,45 @@
         font-weight: 700;
       }
 
-      .section-heading p {
-        margin: 12px auto 0;
-        max-width: 980px;
+      .contact-title p {
+        margin: 14px auto 0;
+        max-width: 900px;
         color: var(--muted);
-        line-height: 1.9;
         font-size: 15px;
+        line-height: 1.9;
       }
 
       .form-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 22px;
-        margin-top: 14px;
       }
 
-      .consult-form,
-      .cooperate-form {
+      .form-box {
+        background: var(--panel-bg);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        box-shadow: 0 4px 12px var(--shadow);
         padding: 18px 18px 14px;
       }
 
-      .form-shell {
-        background: rgba(255,255,255,0.18);
-        border: 1px solid rgba(131, 112, 87, 0.16);
+      .form-inner {
+        background: rgba(255,255,255,0.14);
+        border: 1px solid rgba(130, 111, 89, 0.18);
         border-radius: 12px;
-        padding: 14px 12px 10px;
+        padding: 12px 12px 10px;
       }
 
-      .form-title {
+      .form-header {
         margin: 0 0 12px;
         font-size: 20px;
+        line-height: 1.4;
         font-weight: 700;
       }
 
-      .field-grid {
+      .two-col {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 12px;
       }
 
@@ -265,73 +263,71 @@
         margin-bottom: 12px;
       }
 
-      .field.single {
+      .field.full {
         grid-column: 1 / -1;
       }
 
-      .field label {
+      label {
         display: block;
         margin-bottom: 6px;
         font-size: 13px;
+        line-height: 1.5;
         font-weight: 600;
-        color: #3a332f;
+        color: #3b3430;
       }
 
-      input,
-      textarea,
-      select {
+      input, textarea, select {
         width: 100%;
-        border: 1px solid rgba(127, 106, 81, 0.38);
+        border: 1px solid rgba(125, 105, 82, 0.36);
         border-radius: 8px;
-        background: rgba(255,255,255,0.34);
-        outline: none;
+        background: rgba(255,255,255,0.28);
         padding: 11px 12px;
-        color: var(--text);
         font: inherit;
+        color: var(--text);
+        outline: none;
       }
 
       textarea {
-        min-height: 110px;
+        min-height: 108px;
         resize: vertical;
       }
 
       select {
         appearance: none;
-        background-image: linear-gradient(45deg, transparent 50%, #4d4036 50%), linear-gradient(135deg, #4d4036 50%, transparent 50%);
-        background-position: calc(100% - 18px) calc(50% - 3px), calc(100% - 12px) calc(50% - 3px);
+        background-image: linear-gradient(45deg, transparent 50%, #4e433d 50%), linear-gradient(135deg, #4e433d 50%, transparent 50%);
+        background-position: calc(100% - 18px) calc(50% - 2px), calc(100% - 12px) calc(50% - 2px);
         background-size: 6px 6px, 6px 6px;
         background-repeat: no-repeat;
-        padding-right: 34px;
+        padding-right: 32px;
       }
 
-      .submit-btn {
+      .submit {
         display: block;
         width: 100%;
-        margin-top: 10px;
         border: none;
         border-radius: 12px;
-        background: linear-gradient(180deg, #d9b464, #c99737);
-        color: #fff;
+        padding: 16px 18px;
+        margin-top: 8px;
         font-size: 18px;
         font-weight: 700;
-        padding: 16px 18px;
+        color: #fff;
         cursor: pointer;
-        box-shadow: 0 10px 18px rgba(182, 133, 37, 0.2);
+        background: linear-gradient(180deg, #d8b564, #c9983a);
+        box-shadow: 0 10px 18px rgba(181, 129, 44, 0.16);
       }
 
-      .green-btn {
-        background: linear-gradient(180deg, #4a9a53, #377d45);
-        box-shadow: 0 10px 18px rgba(58, 128, 76, 0.18);
+      .submit.green {
+        background: linear-gradient(180deg, #4a9a58, #377d46);
+        box-shadow: 0 10px 18px rgba(55, 124, 76, 0.16);
       }
 
-      .site-footer {
+      .footer {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 18px;
-        margin-top: 30px;
-        padding: 20px 18px 26px;
-        border-top: 1px solid rgba(129, 103, 73, 0.16);
-        background: rgba(255,255,255,0.12);
+        gap: 16px;
+        padding: 20px 16px 24px;
+        border-top: 1px solid rgba(120, 103, 80, 0.14);
+        margin-top: 28px;
       }
 
       .footer-item {
@@ -339,23 +335,23 @@
         flex-direction: column;
         align-items: center;
         text-align: center;
-        color: #4c443c;
+        color: #4b433d;
       }
 
       .footer-icon {
-        width: 30px;
-        height: 30px;
+        width: 34px;
+        height: 34px;
         border-radius: 50%;
-        background: rgba(255,255,255,0.4);
-        border: 1px solid rgba(120, 101, 79, 0.2);
         display: grid;
         place-items: center;
+        background: rgba(255,255,255,0.34);
+        border: 1px solid rgba(117, 96, 72, 0.18);
         font-size: 18px;
         margin-bottom: 10px;
       }
 
       .footer-item h3 {
-        margin: 0 0 6px;
+        margin: 0 0 8px;
         font-size: 15px;
       }
 
@@ -368,33 +364,25 @@
       @media (max-width: 980px) {
         .top-grid,
         .form-grid,
-        .site-footer {
+        .footer {
           grid-template-columns: 1fr;
         }
 
         .page {
-          width: min(100% - 24px, 1280px);
+          width: min(100% - 18px, 1280px);
           padding-left: 18px;
           padding-right: 18px;
         }
       }
 
       @media (max-width: 560px) {
-        .page {
-          margin-top: 10px;
-          padding-top: 18px;
+        .showcase,
+        .two-col {
+          grid-template-columns: 1fr;
         }
 
-        .section-heading h2 {
+        .contact-title h2 {
           font-size: 28px;
-        }
-
-        .field-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .product-showcase {
-          grid-template-columns: 1fr;
         }
       }
     </style>
@@ -402,73 +390,73 @@
   <body>
     <div class="page">
       <div class="top-grid">
-        <section class="craft-panel" aria-label="非遗文创商品">
-          <div class="panel-header">
+        <section class="panel craft-panel" aria-label="非遗文创商品">
+          <div class="panel-head">
             <h2 class="panel-title">非遗文创商品</h2>
-            <span class="panel-badge">精选推荐</span>
+            <span class="badge">精选推荐</span>
           </div>
-          <p class="hero-copy">
+          <p class="panel-copy">
             传承来自生活的美，连接传统与当代的创意。我们精选广西少数民族文化中的经典工艺与元素，打造兼具收藏价值与日常使用价值的非遗文创产品。
           </p>
 
-          <div class="product-showcase">
-            <article class="mini-card">
-              <div class="mini-image" style="background-image: url('壮族头饰冰箱贴.png');"></div>
-              <div class="mini-body">
-                <h3 class="mini-name">壮族头饰冰箱贴</h3>
-                <p class="mini-desc">金属烤漆工艺，红色与民族纹样并存。</p>
-                <div class="mini-stat"><span class="stars">★★★★★</span><span>128</span></div>
+          <div class="showcase">
+            <article class="card">
+              <div class="card-image" style="background-image: url('��族头饰冰箱贴.png');"></div>
+              <div class="card-body">
+                <h3 class="card-name">壮族头饰冰箱贴</h3>
+                <p class="card-desc">金属烤漆工艺，红色与民族纹样并存。</p>
+                <div class="card-meta"><span class="stars">★★★★★</span><span>128</span></div>
               </div>
             </article>
 
-            <article class="mini-card">
-              <div class="mini-image" style="background-image: url('明信片.png');"></div>
-              <div class="mini-body">
-                <h3 class="mini-name">非遗明信片</h3>
-                <p class="mini-desc">记录风景与文化，适合纪念礼赠收藏。</p>
-                <div class="mini-stat"><span class="stars">★★★★★</span><span>86</span></div>
+            <article class="card">
+              <div class="card-image" style="background-image: url('明信片.png');"></div>
+              <div class="card-body">
+                <h3 class="card-name">非遗明信片</h3>
+                <p class="card-desc">记录风景与文化，适合纪念礼赠收藏。</p>
+                <div class="card-meta"><span class="stars">★★★★★</span><span>86</span></div>
               </div>
             </article>
 
-            <article class="mini-card">
-              <div class="mini-image" style="background-image: url('民族冰箱贴.png');"></div>
-              <div class="mini-body">
-                <h3 class="mini-name">民族风冰箱贴</h3>
-                <p class="mini-desc">温暖自然色调，适合家居装饰与日常氛围提升。</p>
-                <div class="mini-stat"><span class="stars">★★★★★</span><span>156</span></div>
+            <article class="card">
+              <div class="card-image" style="background-image: url('民族冰箱贴.png');"></div>
+              <div class="card-body">
+                <h3 class="card-name">民族风冰箱贴</h3>
+                <p class="card-desc">温暖自然色调，适合家居装饰与日常氛围提升。</p>
+                <div class="card-meta"><span class="stars">★★★★★</span><span>156</span></div>
               </div>
             </article>
 
-            <article class="mini-card">
-              <div class="mini-image" style="background-image: url('书签.png');"></div>
-              <div class="mini-body">
-                <h3 class="mini-name">瑶族刺绣书签</h3>
-                <p class="mini-desc">植入传统花纹与手工技艺，传承细节与故事。</p>
-                <div class="mini-stat"><span class="stars">★★★★★</span><span>63</span></div>
+            <article class="card">
+              <div class="card-image" style="background-image: url('书签.png');"></div>
+              <div class="card-body">
+                <h3 class="card-name">瑶族刺绣书签</h3>
+                <p class="card-desc">以传统花纹与手工技艺为基础，极具收藏价值。</p>
+                <div class="card-meta"><span class="stars">★★★★★</span><span>63</span></div>
               </div>
             </article>
           </div>
         </section>
 
-        <aside class="heritage-panel" aria-label="非遗传承人说">
-          <div class="heritage-header">
+        <aside class="panel heritage-panel" aria-label="非遗传承人说">
+          <div class="panel-head">
             <h2 class="panel-title">非遗传承人说</h2>
           </div>
           <p class="heritage-copy">
             传统手艺不仅是过去的纪念，也是今天的生活方式。每一件作品都承载着匠人对土地、记忆和生命的理解，让文化以温柔且真实的方式走进每个人的日常。
           </p>
-          <div class="heritage-image" aria-label="文化图片"></div>
-          <div class="heritage-feature">
+          <div class="heritage-photo" aria-label="文化图片"></div>
+          <div class="heritage-extra">
             <p>
-              以文化为核心，以现代生活为载体，让非遗从乡野走向城市，让匠心从年轮中延续，让更多人理解并珍惜中华民族珍贵的文化根脉。
+              我们以文化为核心，以现代生活为载体，让非遗从乡野走向城市，让匠心从年轮中延续，让更多人理解并珍惜中华民族珍贵的文化根脉。
             </p>
             <a class="cta" href="#联系我们">了解更多</a>
           </div>
         </aside>
       </div>
 
-      <section class="contact-section" id="联系我们" aria-label="联系我们">
-        <div class="section-heading">
+      <section class="contact-wrap" id="联系我们">
+        <div class="contact-title">
           <h2>联系我们</h2>
           <p>
             无论你是普通用户还是非遗传承人，我们都欢迎与您联系。我们致力于建立文化交流桥梁，期待与更多热爱传统文化与创意生活的人们携手共创。
@@ -476,46 +464,46 @@
         </div>
 
         <div class="form-grid">
-          <form class="consult-form" action="#" method="post">
-            <div class="form-shell">
-              <h3 class="form-title">普通用户咨询</h3>
-              <div class="field-grid">
+          <form class="form-box" action="#" method="post">
+            <div class="form-inner">
+              <h3 class="form-header">普通用户咨询</h3>
+              <div class="two-col">
                 <div class="field">
-                  <label for="name-guest">姓名</label>
-                  <input id="name-guest" type="text" placeholder="请输入您的姓名" />
+                  <label for="guest-name">姓名</label>
+                  <input id="guest-name" type="text" placeholder="请输入您的姓名" />
                 </div>
                 <div class="field">
-                  <label for="email-guest">邮箱</label>
-                  <input id="email-guest" type="email" placeholder="请输入您的邮箱" />
+                  <label for="guest-email">邮箱</label>
+                  <input id="guest-email" type="email" placeholder="请输入您的邮箱" />
                 </div>
-                <div class="field single">
-                  <label for="subject-guest">主题</label>
-                  <input id="subject-guest" type="text" placeholder="请输入咨询主题" />
+                <div class="field full">
+                  <label for="guest-topic">主题</label>
+                  <input id="guest-topic" type="text" placeholder="请输入咨询主题" />
                 </div>
-                <div class="field single">
-                  <label for="message-guest">留言内容</label>
-                  <textarea id="message-guest" placeholder="请输入您的留言内容"></textarea>
+                <div class="field full">
+                  <label for="guest-message">留言内容</label>
+                  <textarea id="guest-message" placeholder="请输入您的留言内容"></textarea>
                 </div>
               </div>
-              <button type="submit" class="submit-btn">提交咨询</button>
+              <button class="submit" type="submit">提交咨询</button>
             </div>
           </form>
 
-          <form class="cooperate-form" action="#" method="post">
-            <div class="form-shell">
-              <h3 class="form-title">非遗传承人合作</h3>
-              <div class="field-grid">
+          <form class="form-box" action="#" method="post">
+            <div class="form-inner">
+              <h3 class="form-header">非遗传承人合作</h3>
+              <div class="two-col">
                 <div class="field">
-                  <label for="name-coop">姓名</label>
-                  <input id="name-coop" type="text" placeholder="请输入您的姓名" />
+                  <label for="coop-name">姓名</label>
+                  <input id="coop-name" type="text" placeholder="请输入您的姓名" />
                 </div>
                 <div class="field">
-                  <label for="phone-coop">联系电话</label>
-                  <input id="phone-coop" type="tel" placeholder="请输入您的联系电话" />
+                  <label for="coop-phone">联系电话</label>
+                  <input id="coop-phone" type="tel" placeholder="请输入您的联系电话" />
                 </div>
-                <div class="field single">
-                  <label for="type-coop">非遗项目类型</label>
-                  <select id="type-coop">
+                <div class="field full">
+                  <label for="coop-type">非遗项目类型</label>
+                  <select id="coop-type">
                     <option selected>请选择您要申请的项目类型</option>
                     <option>传统手工艺</option>
                     <option>服饰文化</option>
@@ -524,22 +512,22 @@
                     <option>其他</option>
                   </select>
                 </div>
-                <div class="field single">
-                  <label for="intro-coop">个人简介</label>
-                  <textarea id="intro-coop" placeholder="请输入您的个人简介"></textarea>
+                <div class="field full">
+                  <label for="coop-intro">个人简介</label>
+                  <textarea id="coop-intro" placeholder="请输入您的个人简介"></textarea>
                 </div>
-                <div class="field single">
-                  <label for="intent-coop">合作意向</label>
-                  <textarea id="intent-coop" placeholder="请简述您的合作意向与需求"></textarea>
+                <div class="field full">
+                  <label for="coop-intent">合作意向</label>
+                  <textarea id="coop-intent" placeholder="请简述您的合作意向与需求"></textarea>
                 </div>
               </div>
-              <button type="submit" class="submit-btn green-btn">提交合作申请</button>
+              <button class="submit green" type="submit">提交合作申请</button>
             </div>
           </form>
         </div>
       </section>
 
-      <footer class="site-footer" aria-label="底部联系方式">
+      <footer class="footer" aria-label="底部联系方式">
         <div class="footer-item">
           <div class="footer-icon">☎</div>
           <h3>电话咨询</h3>
